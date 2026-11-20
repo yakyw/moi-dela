@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Мои задачи — простой и удобный список дел. Планируйте дела, отмечайте выполненное и сохраняйте прогресс.">
+  <title>Мои задачи — список дел</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Мои задачи — к началу страницы">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></svg></span>
+        <span>мои дела<span class="brand-period">.</span></span>
+      </a>
+      <div class="date-chip"><span class="date-dot" aria-hidden="true"></span><time id="today"></time></div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> ПРОСТРАНСТВО ДЛЯ ВАШИХ ИДЕЙ</p>
+          <h1 id="hero-title">Меньше хаоса.<br><span>Больше сделанного.</span></h1>
+          <p class="subtitle">Соберите все дела в одном месте. Разбейте большие цели на маленькие шаги — и отмечайте свой прогресс.</p>
+        </div>
+        <aside class="progress-card" aria-label="Общий прогресс выполнения задач">
+          <div class="progress-heading"><span class="progress-icon" aria-hidden="true">✳</span><span>Ваш прогресс</span></div>
+          <div class="progress-value-row"><strong id="progress-label">0%</strong><span id="progress-caption">Пора начать</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Выполнено задач" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="progress-foot"><span id="completed-summary">0 выполнено</span><span id="total-summary">из 0 задач</span></div>
+        </aside>
+      </section>
+
+      <section class="workspace" aria-labelledby="tasks-title">
+        <div class="section-heading">
+          <div><p class="eyebrow section-eyebrow">ВАШ ПЛАН</p><h2 id="tasks-title">Список задач</h2></div>
+          <span class="task-count" id="task-count">0 задач</span>
+        </div>
+
+        <form class="add-form" id="task-form">
+          <label class="sr-only" for="task-input">Название новой задачи</label>
+          <span class="input-plus" aria-hidden="true">＋</span>
+          <input id="task-input" name="task" type="text" maxlength="160" placeholder="Например, закончить проект…" autocomplete="off" required>
+          <button class="add-button" type="submit"><span>Добавить задачу</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4"/></svg></button>
+        </form>
+        <p class="input-hint">Нажмите Enter, чтобы быстро добавить задачу</p>
+
+        <div class="list-toolbar">
+          <nav class="filters" aria-label="Показать задачи">
+            <button class="filter active" type="button" data-filter="all" aria-pressed="true">Все <span id="all-count">0</span></button>
+            <button class="filter" type="button" data-filter="active" aria-pressed="false">В процессе <span id="active-count">0</span></button>
+            <button class="filter" type="button" data-filter="completed" aria-pressed="false">Готово <span id="done-count">0</span></button>
+          </nav>
+          <button class="clear-btn" id="clear-completed" type="button" disabled><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 6h12M8 6V4h4v2m-7 0 1 10h8l1-10"/></svg><span>Очистить готовые</span></button>
+        </div>
+
+        <ul class="task-list" id="task-list" aria-label="Задачи" aria-live="polite" aria-relevant="additions removals text"></ul>
+        <div class="empty-state" id="empty-state">
+          <div class="empty-illustration" aria-hidden="true"><span class="empty-spark spark-one">✦</span><span class="empty-spark spark-two">✧</span><div class="empty-paper"><span></span><span></span><span></span><b>✓</b></div></div>
+          <h3 id="empty-title">Начнём с первой задачи?</h3>
+          <p id="empty-description">Добавьте дело в поле выше. Маленький шаг — уже начало.</p>
+        </div>
+
+        <footer class="list-footer"><span id="remaining">Пока нет задач</span><span class="local-save"><span aria-hidden="true">●</span> Сохранено автоматически</span></footer>
+      </section>
+    </main>
+
+    <footer class="page-footer"><span>МОИ ДЕЛА</span><span>Планируйте в своём ритме.</span></footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <span id="toast-message">Задача удалена</span>
+    <button id="undo-delete" type="button">Отменить</button>
+    <button class="toast-close" id="toast-close" type="button" aria-label="Закрыть уведомление">×</button>
+  </div>
+</body>
+</html>
